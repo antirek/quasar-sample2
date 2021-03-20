@@ -4,7 +4,7 @@
       <q-img src="https://cdn.quasar.dev/img/mountains.jpg" height="200px" width="700px"></q-img>
 
       <q-card-section>
-        <div class="text-h6">{{ this.title }}</div>
+        <div class="text-h6">{{ company.title }}</div>
         <div class="text-subtitle2">by John Doe</div>
       </q-card-section>
 
@@ -19,8 +19,8 @@
 export default {
   name: 'CompanyCard',
   props: {
-    title: {
-      type: String,
+    company: {
+      type: Object,
       required: true
     }
   }

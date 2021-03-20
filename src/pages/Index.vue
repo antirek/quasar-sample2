@@ -1,7 +1,8 @@
 <template>
   <q-page class="flex flex-center">
-    <q-btn @click="callDialog" label="test" />
-    <company-card title="RRRRRRR"></company-card>
+
+    <List :companies="companies" :onClick="onListItemClick" />
+    <company-card :company="currentCompany" v-if="currentCompany" />
   </q-page>
 </template>
 
@@ -9,13 +10,31 @@
 
 import CompanyCard from '../components/CompanyCard.vue'
 import InputDialog from '../components/InputDialog.vue'
+import List from '../components/List.vue'
 
 export default {
   components: {
-    CompanyCard
+    CompanyCard,
+    List
+  },
+  data () {
+    return {
+      currentCompany: null,
+      companies: [
+        {
+          title: 'New Company 1'
+        },
+        {
+          title: 'New Company 2'
+        }
+      ]
+    }
   },
   name: 'PageIndex',
   methods: {
+    onListItemClick (company) {
+      this.currentCompany = company
+    },
     async callDialog () {
       // const dialog =
       this.$q.dialog({
