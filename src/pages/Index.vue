@@ -1,12 +1,14 @@
 <template>
   <q-page class="flex flex-center">
-
     <List :companies="companies" :onClick="onListItemClick" />
     <company-card :company="currentCompany" v-if="currentCompany" />
+    <p>{{newCounter}}</p>
   </q-page>
 </template>
 
 <script>
+
+// import { mapMutations } from 'vuex';
 
 import CompanyCard from '../components/CompanyCard.vue'
 import InputDialog from '../components/InputDialog.vue'
@@ -19,7 +21,8 @@ export default {
   },
   data () {
     return {
-      currentCompany: null,
+      currentCompany: null
+      /*
       companies: [
         {
           title: 'New Company 1'
@@ -28,12 +31,29 @@ export default {
           title: 'New Company 2'
         }
       ]
+      */
     }
   },
   name: 'PageIndex',
+  computed: {
+    companies: {
+      get () {
+        // return this.$store.state.store.companies
+        // return this.$store.getters['store/getCompanies']
+        return this.$store.getters['store/getCompaniesByType']('zero')
+      }
+    },
+    newCounter: {
+      get () {
+        return this.$store.getters['store/getNewSum']
+      }
+    }
+
+  },
   methods: {
     onListItemClick (company) {
       this.currentCompany = company
+      // console.log('c', this.$store.getters['store/getCompanies'])
     },
     async callDialog () {
       // const dialog =
