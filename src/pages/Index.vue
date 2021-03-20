@@ -19,11 +19,15 @@ export default {
     async callDialog () {
       // const dialog =
       this.$q.dialog({
+        title: 'qw',
         component: InputDialog,
-        message: 'Uploading... 0%',
         // progress: true, // we enable default settings
         persistent: true, // we want the user to not be able to close it
         ok: true // we want the user to not be able to close it
+      }).onOk((data) => {
+        console.log('data', data)
+      }).onCancel(() => {
+        console.log('cancel')
       })
 
       /*

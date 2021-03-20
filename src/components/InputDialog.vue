@@ -1,5 +1,5 @@
 <template>
-  <q-dialog ref="dialog" @hide="onDialogHide">
+  <q-dialog ref="dialog" @hide="onDialogHide" persistent>
     <q-card style="min-width: 450px">
       <q-card-section>
 
@@ -14,7 +14,12 @@
             autofocus
             outlined
         />
-
+        <q-input
+            dense
+            v-model="data2"
+            autofocus
+            outlined
+        />
       </q-card-section>
 
       <q-card-actions align="right" class="text-primary">
@@ -31,7 +36,8 @@ export default {
   name: 'InputDialog',
   data: function () {
     return {
-      data: ''
+      data: '',
+      data2: ''
     }
   },
   props: ['title'],
@@ -46,7 +52,7 @@ export default {
       this.$emit('hide')
     },
     onOKClick () {
-      this.$emit('ok', this.data)
+      this.$emit('ok', { data: this.data, data2: this.data2 })
       this.hide()
     },
     onCancelClick () {
