@@ -8,8 +8,6 @@ export function appendCompany (state, company) {
 }
 
 export function addNew (state, companyId) {
-  console.log('ttt', companyId)
   const company = state.companies.find(c => c.companyId === companyId)
-  Object.assign(company, { new: company.new + 1 })
-  console.log(state.companies)
+  company.new += 1
 }
