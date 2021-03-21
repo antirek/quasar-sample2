@@ -3,12 +3,15 @@
     <List :companies="companies" :onClick="onListItemClick" />
     <company-card :company="currentCompany" v-if="currentCompany" />
     <p>{{newCounter}}</p>
+
+    <q-btn @click="add(1)" label="inc 3"/>
+    <q-btn @click="add(2)" label="inc 4"/>
   </q-page>
 </template>
 
 <script>
 
-// import { mapMutations } from 'vuex';
+import { mapState } from 'vuex'
 
 import CompanyCard from '../components/CompanyCard.vue'
 import InputDialog from '../components/InputDialog.vue'
@@ -36,24 +39,29 @@ export default {
   },
   name: 'PageIndex',
   computed: {
-    companies: {
-      get () {
-        // return this.$store.state.store.companies
-        // return this.$store.getters['store/getCompanies']
-        return this.$store.getters['store/getCompaniesByType']('zero')
-      }
-    },
     newCounter: {
       get () {
         return this.$store.getters['store/getNewSum']
       }
-    }
-
+    },
+    ...mapState({
+      companies () {
+        // return this.$store.state.store.companies
+        // return this.$store.getters['store/getCompanies']
+        return this.$store.getters['store/getCompaniesByType']('zero')
+        // return this.$store.getters['store/getCompaniesZero']
+      }
+    })
   },
   methods: {
     onListItemClick (company) {
       this.currentCompany = company
       // console.log('c', this.$store.getters['store/getCompanies'])
+    },
+    add (companyId) {
+      console.log('add', companyId)
+      this.$store.commit('store/addNew', companyId)
+      // console.log(this.$store)
     },
     async callDialog () {
       // const dialog =

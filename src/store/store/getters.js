@@ -19,3 +19,7 @@ export function getCompaniesByType (state) {
     return state.companies.filter(c => c.type === type)
   }
 }
+
+export function getCompaniesZero (state) {
+  return state.companies.filter(c => c.type === 'zero')
+}
