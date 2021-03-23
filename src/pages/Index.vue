@@ -6,6 +6,18 @@
 
     <q-btn @click="add(1)" label="inc 3"/>
     <q-btn @click="add(2)" label="inc 4"/>
+    <br/>
+    <br/>
+    <br/>
+    {{ text }}
+    <br/>
+    <q-scroll-area style="height: 200px; width: 300px; border: 1px solid;" >
+      <div v-for="(item, index) in items" :key="index" class="q-py-xs">
+         <div v-intersection="function(entry) { onIntersection(item, entry)}">
+          {{ item.text }}
+         </div>
+      </div>
+    </q-scroll-area>
   </q-page>
 </template>
 
@@ -24,7 +36,38 @@ export default {
   },
   data () {
     return {
-      currentCompany: null
+      currentCompany: null,
+      text: null,
+      items: [
+        {
+          text: '1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          date: '2019-01-01'
+        },
+        {
+          text: '2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          date: '2020-01-02'
+        },
+        {
+          text: '3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          date: '2021-01-03'
+        },
+        {
+          text: '4. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          date: '2020-01-04'
+        },
+        {
+          text: '5. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          date: '2021-01-05'
+        },
+        {
+          text: '6. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          date: '2020-01-06'
+        },
+        {
+          text: '7. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          date: '2021-01-07'
+        }
+      ]
       /*
       companies: [
         {
@@ -54,6 +97,11 @@ export default {
     })
   },
   methods: {
+    onIntersection (item, entry) {
+      if (entry.isIntersecting) {
+        this.text = item.date
+      }
+    },
     onListItemClick (company) {
       this.currentCompany = company
       // console.log('c', this.$store.getters['store/getCompanies'])
