@@ -18,6 +18,32 @@
          </div>
       </div>
     </q-scroll-area>
+    <br>
+     <q-card class="position-relative" style="height: 500px;">
+      <q-card-section>
+        <div class="text-h6">Our Changing Planet</div>
+      </q-card-section>
+      <q-separator></q-separator>
+      <q-card-section>
+        {{ lorem }}
+      </q-card-section>
+      <q-card-section class="absolute-bottom q-pa-none">
+      <q-separator ></q-separator>
+        <q-card-actions>
+          <q-btn flat icon="event" />
+          <q-btn flat>
+            5:30PM
+          </q-btn>
+          <q-btn flat>
+            7:00PM
+          </q-btn>
+          <q-btn flat color="primary">
+            Reserve
+          </q-btn>
+        </q-card-actions>
+      </q-card-section>
+    </q-card>
+
   </q-page>
 </template>
 
