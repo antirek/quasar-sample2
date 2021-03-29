@@ -10,6 +10,7 @@
         <ListCard
           :items="items"
           header="Items"
+          :onItemClick="alert"
         />
       </div>
     </div>
@@ -23,6 +24,11 @@ import ListCard from '../components/ListCard.vue'
 export default {
   components: {
     ListCard
+  },
+  methods: {
+    alert (item) {
+      console.log('clicked', item)
+    }
   },
   data () {
     return {

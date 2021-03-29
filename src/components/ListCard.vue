@@ -1,5 +1,5 @@
 <template>
-  <q-card class="position-relative full-width" style="height:60vh;">
+  <q-card class="position-relative full-width" style="height:70vh;">
     <q-item>
       <q-item-section>
         <div class="text-h5">{{ header }}</div>
@@ -19,18 +19,20 @@
         placeholder="Фильтр по имени или номеру">
         <template v-slot:append>
           <q-icon v-if="filterText !== ''" name="close" @click="filterText = ''" class="cursor-pointer" />
-          <q-icon name="search" />
+          <q-icon v-if="filterText === ''" name="search" />
         </template>
       </q-input>
     </q-toolbar>
 
-    <q-scroll-area class="fit">
-      <q-list class="scroll">
+    <q-scroll-area style="height: 50vh;">
+      <q-list>
         <q-item
-          v-for="(item) in items"
+          bordered
+          separator
+          v-for="(item) in filteredItems"
           :key="item.id"
           clickable
-          @click="onSelectItem(item)"
+          @click="onItem(item)"
           active-class="active-item"
         >
           {{ item.text  }}
@@ -54,12 +56,27 @@
 export default {
   props: {
     header: String,
-    items: Array
+    items: Array,
+    onItemClick: Function
   },
   data () {
     return {
       filterText: '',
       currentItem: {}
+    }
+  },
+  methods: {
+    onItem (item) {
+      this.currentItem = item
+      if (this.onItemClick) {
+        this.onItemClick(item)
+      }
+    }
+  },
+  computed: {
+    filteredItems () {
+      // const items = [...this.items]
+      return this.items.filter(item => item.text.includes(this.filterText))
     }
   }
 }
