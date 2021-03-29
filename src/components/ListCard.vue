@@ -1,6 +1,6 @@
 <template>
-  <q-card class="position-relative full-width" style="height:70vh;">
-    <q-item>
+  <q-card class="position-relative full-width items-stretch shadow-5" style="height:70vh">
+    <q-item class="">
       <q-item-section>
         <div class="text-h5">{{ header }}</div>
       </q-item-section>
@@ -16,7 +16,7 @@
         class="full-width"
         bg-color="white"
         v-model="filterText"
-        placeholder="Фильтр по имени или номеру">
+        placeholder="Фильтр">
         <template v-slot:append>
           <q-icon v-if="filterText !== ''" name="close" @click="filterText = ''" class="cursor-pointer" />
           <q-icon v-if="filterText === ''" name="search" />
@@ -24,7 +24,7 @@
       </q-input>
     </q-toolbar>
 
-    <q-scroll-area style="height: 50vh;">
+    <q-scroll-area class="full-fit">
       <q-list>
         <q-item
           bordered
@@ -79,6 +79,7 @@ export default {
       return this.items.filter(item => item.text.includes(this.filterText))
     }
   }
+  // 65 + 50 + 52
 }
 </script>
 
@@ -88,4 +89,6 @@ export default {
   color: white
   background: #F2C037
 
+.full-fit
+  height: calc(100% - 168px)
 </style>
